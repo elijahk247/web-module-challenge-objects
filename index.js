@@ -1,7 +1,15 @@
 ///////////////Menu Items (MVP)///////////////////
 
 const latte = {name: "Cafe Latte", price: 4, category: "Drinks"};
-const burger = {name: "Burger", price: 18, category: "Lunch"};
+const burger = {name: "Burger", price: 18, category: "Lunch", 
+discount: function(str) {
+    if(str === 'teacher' || str === 'student') {
+      return burger.price * .75;
+    } else {
+      return burger.price * .9;
+    }
+  }
+};
 const breakfastBurrito = {name: "Breakfast Burrito", price: 16, category:"Breakfast"};
 
 /* Task 1a: write a function to return more menu items with the same format as the items above. */
@@ -31,7 +39,9 @@ and should return a number.
 
 For example, burger.discount("teacher") would return 13.5 and burger.discount("public") would return 16.2*/
 
-
+console.log('Task 2: ', burger.discount('teacher'));
+console.log('Task 2: ', burger.discount('student'));
+console.log('Task 2: ', burger.discount('public'));
 
 ///////////////Reviews (MVP)///////////////////
 
@@ -51,6 +61,8 @@ console.log('Task 3: ', reviews[5].feedback);
 
 /* Task 4: Add a new rating with your (fictitious) opinions of the restaurant in the same format as the reviews above. */
 
+reviews.unshift({name: 'Eli', rating: 4, feedback: "It was a good time"});
+console.log('Task 4: ', reviews[0]);
 
 /* Task 5: Add the following feedback to Reyna's rating - "this place is chill with really cool people, great for getting work done on weekdays" */
 
@@ -86,9 +98,11 @@ and should return a string in the format `name} gave the restaurant a {rating}, 
 
 For example, if getLastReview is invoked passing the reviews array it will return `Reyna gave the restaurant a 3.5 star review and their feedback was: "this place is chill with really cool people, great for getting work done on weekdays"`.
 */
-function getLastReview(/* code here */) {
-    /* code here */
-  } 
+function getLastReview(arr) {
+  return `${arr[arr.length-1].name} gave the restaurant a ${arr[arr.length-1].rating} and their feed back was: ${arr[arr.length-1].feedback}`;
+}
+
+console.log('Task 7: ', getLastReview(reviews));
 
 
 ///////////////🍔☕️🍽 STRETCH🍔☕️🍽////////////////////
@@ -105,9 +119,18 @@ function getLastReview(/* code here */) {
     {name:"Lauren", rating: 4, feedback: "Absolutely love that they have karaoke Fridays! Food and drink selection is okay."}]
 */
 
- function getReviewByRating(/* code here */) {
-    /* code here */
+ function getReviewByRating(arr, rating) {
+   let ratings = [];
+
+   for(let i = 0; i < arr.length; i++) {
+     if(arr[i].rating >= rating && arr[i].rating < rating + 1) {
+       ratings.push(arr[i]);
+     }
+   }
+   return ratings;
   }
+
+  console.log('Stretch 1: ', getReviewByRating(reviews, 4));
 
   
 /** STRETCH 2: Write a function called 'getLongestReview' that returns an array containing all reviews longer than 15 words. 
@@ -123,9 +146,19 @@ and should return an array of objects.
     {name: "Brett", rating: 3, feedback: "great selection of snacks and a nice cafe area to get work done during the day."},
     {name: "Julius", rating: 2, feedback: "I was largely unimpressed by this venue. Nothing special on the menu and too expensive. The atmosphere is polarizing, and not for me, but I think some would like it." }]
 */
-  function getLongReviews(/* code here */) {
-    /* code here */
+/*
+  function getLongReviews(arr) {
+    let lengthyReviews = [];
+
+    for(let i = 0; i < arr.length; i++) {
+      if(arr[i].feedback.length > 15) {
+        lengthyReviews.push(arr[i]);
+      }
+    }
+    return lengthyReviews;
   }
+
+  console.log('Stretch 2: ', getLongReviews(reviews));*/
   
 
 /* STRETCH 3:  This challenge is not related to the data above! 
